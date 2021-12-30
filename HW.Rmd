@@ -1,0 +1,74 @@
+---
+title: "Heat Waves - Time series analysis"
+author: "Alan Domínguez"
+date: "12/13/2021"
+output: html_document
+---
+
+## Assessment of short-term effects of heath waves on mortality and morbidity in Santiago of CHILE. A time series analysis in a small areas.
+
+The aim of this study is to analyze the association between heath waves, extreme temperatures on morbidity and mortality, for respiratory and cardiovascular diseases in three communes of the Metropolitan Region of CHILE (Cerro Navia, Pudahuel, Santiago Center).
+
+```{r Libraries, include=FALSE}
+
+# libraries
+pacman::p_load(tidyverse, lubridate, heatwaveR, readxl)
+
+```
+
+We start loading our datasets for **El Bosque**
+
+```{r datasets El Bosque, include=FALSE}
+
+#mortality
+mortality_EB <- read_excel("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/El Bosque/BASE_def_EB.xlsx")
+
+#morbidity
+morbidity_EB <- read_excel("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/El Bosque/BASE_egr_EB.xlsx")
+
+
+
+```
+
+Add new temperature data, and calculate mean, min and max temperatures with hourly data
+
+```{r}
+
+library(lubridate)
+
+# firstly we load the csv file with temperature data
+cn_temperature <-read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/Cerro Navia/datos_170101_190101.csv", sep =';')
+
+# we rename the variables 
+cn_temperature <- rename(cn_temperature, date = FECHA..YYMMDD. , hour = HORA..HHMM., temperature = X)
+
+# select only the variables of interest
+cn_temperature <- select(cn_temperature, -X.1)
+
+# change the format 
+cn_temperature <- transform(cn_temperature, date = as.Date(as.character(date), "%y%m%d"))
+
+cn_temperature$temperature <- as.numeric(cn_temperature$temperature)
+
+
+
+
+str(cn_temperature)
+
+###insert chunk = option + cmd + i
+
+## R Markdown
+
+
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
