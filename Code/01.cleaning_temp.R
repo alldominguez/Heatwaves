@@ -17,7 +17,7 @@ setwd("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data") # asignamos 
 cn_temperature <-read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/Cerro Navia/cn_17_19_temp.csv", sep =';', encoding ="UTF-8")
 
 # santiago centro
-sc_temperature <- read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/Santiago Centro/sc_17-19_temp.csv", sep =';', encoding ="UTF-8")
+sc_temperature <- read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/Santiago Centro/sc_17_19_temp.csv", sep =';', encoding ="UTF-8")
 
 # el bosque
 eb_temperature <- read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/El Bosque/eb_17_19_temp.csv", sep =';', encoding ="UTF-8")
@@ -27,7 +27,6 @@ eb_temperature <- read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwave
 str(cn_temperature) # 
 
 # para facilitar el manejo de los datos cambiamos el nombre de las variables
-
 cn_temperature_hourly <- cn_temperature %>% select(FECHA..YYMMDD., HORA..HHMM., X) %>% 
   rename(date = FECHA..YYMMDD., hour = HORA..HHMM., temp = X) 
 
@@ -92,7 +91,7 @@ sc_missing_plot <- visdat::vis_miss(sc_temperature_hourly) + ggtitle("Santiago C
 eb_missing_plot <- visdat::vis_miss(eb_temperature_hourly) + ggtitle("El Bosque") # el bosque
 
 library(patchwork)
-missing_plot <- cn_missing_plot / sc_missing_plot / eb_missing_plot
+missing_plot_hourly <- cn_missing_plot / sc_missing_plot / eb_missing_plot
 
 # revisamos missing values en nuestra serie de tiempo horaria 
 cn_temperature_hourly %>%
@@ -212,9 +211,9 @@ eb_temperature_daily <- eb_temperature_daily %>%
 
 rio::export(cn_temperature_daily, "cn_temp_daily.xlsx") # exportamos cerro navia
 
-rio::export(sc_temperature_daily, "cn_temp_daily.xlsx") # exportamos santiago centro
+rio::export(sc_temperature_daily, "sc_temp_daily.xlsx") # exportamos santiago centro
 
-rio::export(eb_temperature_daily, "cn_temp_daily.xlsx") # exportamos el bosque
+rio::export(eb_temperature_daily, "eb_temp_daily.xlsx") # exportamos el bosque
 
 ####################################
 ######### visualizaciones ##########
