@@ -218,7 +218,7 @@ rio::export(eb_temperature_daily, "eb_temp_daily.xlsx") # exportamos el bosque
 ####################################
 ######### visualizaciones ##########
 ####################################
- 
+  
 # scatter plot
 
 # generamos un grafico para revisar la serie de tiempo de las temperaturas promedio

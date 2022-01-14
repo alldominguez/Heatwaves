@@ -43,7 +43,7 @@ remove(cn_ws, sc_ws, eb_ws)
 #######################################
 ######### cambio de formatos ##########
 #######################################
- 
+  
 # cambiamos formato de date
 cn_ws_hourly$date <- lubridate::ymd(cn_ws_hourly$date) # la forma más facil
 
