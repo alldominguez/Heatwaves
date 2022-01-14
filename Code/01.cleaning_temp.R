@@ -67,7 +67,7 @@ eb_temperature_hourly <- eb_temperature_hourly %>% mutate(year = lubridate::year
                                                           month = lubridate::month(date),
                                                           day = lubridate::day(date))
 
-str(eb_temperature_hourly)
+c(str(cn_temperature_hourly), str(sc_temperature_hourly), str(eb_temperature_hourly))
 
 #cambiamos formato de temperatura
 cn_temperature_hourly <- cn_temperature_hourly %>%  
@@ -218,21 +218,29 @@ rio::export(eb_temperature_daily, "eb_temp_daily.xlsx") # exportamos el bosque
 ####################################
 ######### visualizaciones ##########
 ####################################
-
+ 
 # scatter plot
 
 # generamos un grafico para revisar la serie de tiempo de las temperaturas promedio
-cn_temperature_scatter <- ggplot2::ggplot(eb_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
+cn_temperature_scatter <- ggplot2::ggplot(cn_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
   geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
                geom_smooth() # si queremos añadir la tendencia
 
-sc_temperature_scatter <-
+sc_temperature_scatter <- ggplot2::ggplot(sc_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
+  geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
+  scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
+               date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
+  geom_smooth() # si queremos añadir la tendencia
   
   
 
-eb_temperature_scatter <- 
+eb_temperature_scatter <- ggplot2::ggplot(eb_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
+  geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
+  scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
+               date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
+  geom_smooth() # si queremos añadir la tendencia
 
   
 

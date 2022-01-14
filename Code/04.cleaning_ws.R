@@ -40,8 +40,31 @@ eb_ws_hourly <- eb_ws %>% select(FECHA..YYMMDD., HORA..HHMM., X) %>%
 # removemos los dabase previos
 remove(cn_ws, sc_ws, eb_ws) 
 
+#######################################
+######### cambio de formatos ##########
+#######################################
+ 
+# cambiamos formato de date
+cn_ws_hourly$date <- lubridate::ymd(cn_ws_hourly$date) # la forma más facil
 
+sc_ws_hourly$date <- lubridate::ymd(sc_ws_hourly$date)
 
+eb_ws_hourly$date <- lubridate::ymd(eb_ws_hourly$date)
+
+# generamos 3 nuevas variables , year, month, day 
+cn_temperature_hourly <- cn_temperature_hourly %>% mutate(year = lubridate::year(date),
+                                                          month = lubridate::month(date),
+                                                          day = lubridate::day(date))
+
+sc_temperature_hourly <- sc_temperature_hourly %>% mutate(year = lubridate::year(date),
+                                                          month = lubridate::month(date),
+                                                          day = lubridate::day(date))
+
+eb_temperature_hourly <- eb_temperature_hourly %>% mutate(year = lubridate::year(date),
+                                                          month = lubridate::month(date),
+                                                          day = lubridate::day(date))
+
+str(eb_temperature_hourly)
 
 
 
