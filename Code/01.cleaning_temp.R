@@ -1,5 +1,8 @@
 # Datos series de tiempo (2017-2019) - promedios diarios con datos horarios (temperaturas)
 
+
+### keychain : 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
+
 #librerias 
 pacman::p_load(tidyverse, lubridate, heatwaveR, readxl, rio, naniar, visdat, mice, patchwork)
 
@@ -112,9 +115,9 @@ sc_temperature_hourly %>%  select(year, temp) %>% group_by(year) %>%naniar::miss
 eb_temperature_hourly %>%  select(year, temp) %>% group_by(year) %>% naniar::miss_var_summary() 
 
 # revisamos si existen hidden missing values
-
 cn_temperature_hourly %>% naniar::miss_scan_count(search = list("NA", "N/A", "na", ""))
-
+sc_temperature_hourly %>% naniar::miss_scan_count(search = list("NA", "N/A", "na", ""))
+eb_temperature_hourly %>% naniar::miss_scan_count(search = list("NA", "N/A", "na", ""))
 
 ###############################################
 ######### calculo datos diarios ###############
@@ -226,21 +229,20 @@ cn_temperature_scatter <- ggplot2::ggplot(cn_temperature_daily, mapping = aes(x 
   geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
-               geom_smooth() # si queremos añadir la tendencia
+               geom_smooth() + ggtitle("Cerro Navia") # si queremos añadir la tendencia
 
 sc_temperature_scatter <- ggplot2::ggplot(sc_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
   geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
-  geom_smooth() # si queremos añadir la tendencia
-  
-  
+  geom_smooth() + ggtitle("Santiago Centro") # si queremos añadir la tendencia
 
 eb_temperature_scatter <- ggplot2::ggplot(eb_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
   geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
-  geom_smooth() # si queremos añadir la tendencia
+  geom_smooth() + ggtitle("El Bosque")  # si queremos añadir la tendencia
 
-  
+cn_temperature_scatter / sc_temperature_scatter / eb_temperature_scatter
+
 
