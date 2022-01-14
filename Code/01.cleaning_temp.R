@@ -24,7 +24,7 @@ eb_temperature <- read.csv("/Users/aldominguez/Desktop/Github_Proyectos/Heatwave
 
 
 #revisar la estructura de los datos
-str(cn_temperature) # 
+c(str(cn_temperature), str(sc_temperature), str(eb_temperature)) # 
 
 # para facilitar el manejo de los datos cambiamos el nombre de las variables
 cn_temperature_hourly <- cn_temperature %>% select(FECHA..YYMMDD., HORA..HHMM., X) %>% 
@@ -219,34 +219,20 @@ rio::export(eb_temperature_daily, "eb_temp_daily.xlsx") # exportamos el bosque
 ######### visualizaciones ##########
 ####################################
 
-####### graficos de time series  
+# scatter plot
 
 # generamos un grafico para revisar la serie de tiempo de las temperaturas promedio
-ggplot2::ggplot(eb_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
+cn_temperature_scatter <- ggplot2::ggplot(eb_temperature_daily, mapping = aes(x = date, y = temp_mean)) + 
   geom_point() + xlab("Date") + ylab("Temperature ºC") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
                geom_smooth() # si queremos añadir la tendencia
 
+sc_temperature_scatter <-
+  
+  
 
-# grafico de las diferentes estaciones de monitoreo con datos diarios
+eb_temperature_scatter <- 
 
-cn <- cn_temperature_daily %>% group_by(year) %>%
-  summarise(temp_max = mean(temp_max, na.omit = TRUE)) %>% 
-  ggplot(mapping = aes(x = year, y = temp_max)) + 
-  geom_line() + theme_classic() + 
-  scale_x_continuous(breaks=seq(2017, 2019, 1))
-
-sc <- sc_temperature_daily %>% group_by(year) %>%
-  summarise(temp_max = mean(temp_max, na.rm = TRUE)) %>% 
-  ggplot(mapping = aes(x = year, y = temp_max)) + 
-  geom_line() + theme_classic() + 
-  scale_x_continuous(breaks=seq(2017, 2019, 1))
-
-eb <- eb_temperature_daily %>% group_by(year) %>%
-  summarise(temp_max = mean(temp_max, na.rm = TRUE)) %>% 
-  ggplot(mapping = aes(x = year, y = temp_max)) + 
-  geom_line() + theme_classic() + 
-  scale_x_continuous(breaks=seq(2017, 2019, 1))
   
 

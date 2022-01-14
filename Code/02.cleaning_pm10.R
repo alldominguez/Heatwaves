@@ -241,18 +241,22 @@ eb_pm10_scatter <- ggplot2::ggplot(eb_pm10_daily, mapping = aes(x = date, y = pm
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
   geom_smooth(colour = "red") + ggtitle("El Bosque")# si queremos añadir la tendencia
 
+# figura 1
 pm10_sinca_scatter <- cn_pm10_scatter / sc_pm10_scatter / eb_pm10_scatter
 
 # boxplot 
-
 cn_pm10_boxplot <- ggplot2::ggplot(cn_pm10_daily, mapping = aes(x = as.character(year), y = pm10_mean)) +
-  geom_boxplot() + xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("Cerro Navia")
+  geom_boxplot() + scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, by = 50)) + 
+  xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("Cerro Navia")
 
 sc_pm10_boxplot <- ggplot2::ggplot(sc_pm10_daily, mapping = aes(x = as.character(year), y = pm10_mean)) +
-  geom_boxplot() + xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("Santiago Centro")
+  geom_boxplot() + scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, by = 50)) + 
+  xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("Santiago Centro")
 
 eb_pm10_boxplot <- ggplot2::ggplot(eb_pm10_daily, mapping = aes(x = as.character(year), y = pm10_mean)) +
-  geom_boxplot() + xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("El Bosque")
+  geom_boxplot() + scale_y_continuous(limits = c(0, 250), breaks = seq(0, 250, by = 50)) + 
+  xlab("Year") + ylab("PM 10 ug/m3") + theme_classic() + ggtitle("El Bosque")
 
-boxplot_p
+# figura 2
+pm10_sinca_boxplot <- cn_pm10_boxplot / sc_pm10_boxplot / eb_pm10_boxplot
 
