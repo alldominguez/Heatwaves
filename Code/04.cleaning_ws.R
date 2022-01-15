@@ -216,7 +216,7 @@ rio::export(eb_ws_daily, "eb_ws_daily.xlsx") # exportamos el bosque
 
 # scatter plot
 
-# generamos un grafico para revisar la serie de tiempo de las temperaturas promedio
+# generamos un grafico para revisar la serie de tiempo de las velocidades del viento
 cn_ws_scatter <- ggplot2::ggplot(cn_ws_daily, mapping = aes(x = date, y = ws_mean)) + 
   geom_point() + xlab("Date") + ylab("Wind Speed") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 

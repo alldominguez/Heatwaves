@@ -218,7 +218,7 @@ rio::export(eb_rh_daily, "eb_rh_daily.xlsx") # exportamos el bosque
 
 # scatter plot
 
-# generamos un grafico para revisar la serie de tiempo de las temperaturas promedio
+# generamos un grafico para revisar la serie de tiempo de las humedad relativa
 cn_rh_scatter <- ggplot2::ggplot(cn_rh_daily, mapping = aes(x = date, y = rh_mean)) + 
   geom_point() + xlab("Date") + ylab("Relative Humidity") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 

@@ -213,7 +213,29 @@ rio::export(sc_pm25_daily, "sc_pm25_daily.xlsx") # exportamos santiago centro
 
 rio::export(eb_pm25_daily, "eb_pm25_daily.xlsx") # exportamos el bosque
 
+####################################
+######### visualizaciones ##########
+####################################
 
+# scatterplot   
 
+# generamos un grafico para revisar la serie de tiempo de las pm25 promedio
+cn_pm25_scatter <- ggplot2::ggplot(cn_pm25_daily, mapping = aes(x = date, y = pm25_mean)) + 
+  geom_point() + xlab("Date") + ylab("PM 25 ug/m3") + theme_classic() + 
+  scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
+               date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
+  geom_smooth(colour = "red") + ggtitle("Cerro Navia") # si queremos añadir la tendencia
+
+sc_pm25_scatter <- ggplot2::ggplot(sc_pm25_daily, mapping = aes(x = date, y = pm25_mean)) + 
+  geom_point() + xlab("Date") + ylab("PM 25 ug/m3") + theme_classic() + 
+  scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
+               date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
+  geom_smooth(colour = "red") + ggtitle("Santiago Centro")# si queremos añadir la tendencia
+
+eb_pm25_scatter <- ggplot2::ggplot(eb_pm25_daily, mapping = aes(x = date, y = pm25_mean)) + 
+  geom_point() + xlab("Date") + ylab("PM 25 ug/m3") + theme_classic() + 
+  scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
+               date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
+  geom_smooth(colour = "red") + ggtitle("El Bosque")# si queremos añadir la tendencia
 
 

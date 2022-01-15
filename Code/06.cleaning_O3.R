@@ -224,7 +224,7 @@ rio::export(eb_o3_daily, "eb_o3_daily.xlsx") # exportamos el bosque
 
 # scatterplot   
 
-# generamos un grafico para revisar la serie de tiempo de las pm10 promedio
+# generamos un grafico para revisar la serie de tiempo de las ozono
 cn_o3_scatter <- ggplot2::ggplot(cn_o3_daily, mapping = aes(x = date, y = o3_mean)) + 
   geom_point() + xlab("Date") + ylab("Ozone ug/m3") + theme_classic() + 
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
