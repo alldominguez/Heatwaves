@@ -1,7 +1,7 @@
 # Datos series de tiempo (2017-2019) - promedios diarios con datos horarios (temperaturas)
 
  
-### keychain : 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
+### keychain : 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
 
 #librerias 
 pacman::p_load(tidyverse, lubridate, heatwaveR, readxl, rio, naniar, visdat, mice, patchwork)
@@ -141,7 +141,7 @@ sc_temperature_daily <- sc_temperature_hourly %>% group_by(date) %>%  # calculo 
   mutate(year = lubridate::year(date),
          month = lubridate::month(date),
          day = lubridate::day(date))
-
+ 
 
 eb_temperature_daily <- eb_temperature_hourly %>% group_by(date) %>% # calculo el bosque
   summarise(temp_mean = mean(temp , na.rm = TRUE),

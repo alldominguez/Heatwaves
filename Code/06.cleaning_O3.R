@@ -10,7 +10,7 @@ setwd("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data") # asignamos 
 #######################################
 ######### cargar los datos ############
 #######################################
-
+ 
 
 ###################### O3 ######################
 

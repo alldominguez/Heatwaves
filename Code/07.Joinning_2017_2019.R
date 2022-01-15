@@ -11,7 +11,7 @@ setwd("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data") # asignamos 
 #######################################
 ########### Cerro Navia ###############
 #######################################
-
+ 
 # cargamos los datos 2017-2019 para datos ambientales (SINCA) y datos de mortalidad (DEIS)
 
 # mortalidad para todas las causas 2017-2019 
