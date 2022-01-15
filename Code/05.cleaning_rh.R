@@ -150,7 +150,7 @@ eb_rh_daily <- eb_rh_hourly %>% group_by(date) %>% # calculo el bosque
 ###################################################
 ######### revisamos missings values ###############
 ###################################################
-
+ 
 library(visdat) # utilizamos la libreria visdat
 
 cn_missing_plot <- visdat::vis_miss(cn_rh_daily) + ggtitle("Cerro Navia") # cerro navia

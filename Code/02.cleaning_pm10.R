@@ -259,4 +259,4 @@ eb_pm10_boxplot <- ggplot2::ggplot(eb_pm10_daily, mapping = aes(x = as.character
 
 # figura 2
 pm10_sinca_boxplot <- cn_pm10_boxplot / sc_pm10_boxplot / eb_pm10_boxplot
-
+ 

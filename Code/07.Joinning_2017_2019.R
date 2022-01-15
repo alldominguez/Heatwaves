@@ -106,7 +106,7 @@ rio::export(cn_all_causes_sinca_2017_2019, "cn_all_causes_sinca_2017_2019.xlsx")
 rio::export(cn_cardio_sinca_2017_2019, "cn_cardio_sinca_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
 
 rio::export(cn_resp_2017_2019 , "cn_resp_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
-
+ 
 
 ###############################################################################################################################################################################
 

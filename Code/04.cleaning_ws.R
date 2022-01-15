@@ -213,7 +213,7 @@ rio::export(eb_ws_daily, "eb_ws_daily.xlsx") # exportamos el bosque
 ####################################
 ######### visualizaciones ##########
 ####################################
-
+ 
 # scatter plot
 
 # generamos un grafico para revisar la serie de tiempo de las velocidades del viento

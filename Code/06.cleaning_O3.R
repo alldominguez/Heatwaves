@@ -216,7 +216,7 @@ rio::export(cn_o3_daily, "cn_o3_daily.xlsx") # exportamos cerro navia
 rio::export(sc_o3_daily, "sc_o3_daily.xlsx") # exportamos santiago centro
 
 rio::export(eb_o3_daily, "eb_o3_daily.xlsx") # exportamos el bosque
-
+ 
 
 ####################################
 ######### visualizaciones ##########

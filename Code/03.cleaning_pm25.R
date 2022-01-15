@@ -216,7 +216,7 @@ rio::export(eb_pm25_daily, "eb_pm25_daily.xlsx") # exportamos el bosque
 ####################################
 ######### visualizaciones ##########
 ####################################
-
+ 
 # scatterplot   
 
 # generamos un grafico para revisar la serie de tiempo de las pm25 promedio
