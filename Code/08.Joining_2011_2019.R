@@ -7,3 +7,5 @@ getwd() #revisamos el espacio de trabajo
 
 setwd("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data") # asignamos nuestro espacio de trabajo
        
+
+ 
