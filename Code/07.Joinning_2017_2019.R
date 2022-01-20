@@ -114,15 +114,201 @@ rio::export(cn_resp_2017_2019 , "cn_resp_2017_2019.xlsx") # exportamos mortalida
 ########### El Bosque #################
 #######################################
 
+# cargamos los datos 2017-2019 para datos ambientales (SINCA) y datos de mortalidad (DEIS)
+
+# mortalidad para todas las causas 2017-2019 
+eb_mortality_all_causes <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_eb/mortality_eb_all_causes_2017_2019.xlsx")
+
+#mortalidad causas cardiovascular 2017-2019
+eb_mortality_cardio <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_eb/mortality_eb_cardio_2017_2019.xlsx")
+
+#mortalidad causas respiratorias 2017-2019
+eb_mortality_resp <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_eb/mortality_eb_resp_2017_2019.xlsx")
 
 
+# datos ambientales 
+
+# temperatura 
+eb_temperature <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_temp_daily.xlsx")
+
+# pm10
+eb_pm10 <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_pm10_daily.xlsx")
+
+# pm25 
+eb_pm25 <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_pm25_daily.xlsx")
+
+# ozono
+eb_o3 <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_o3_daily.xlsx")
+
+# velocidad del viento 
+eb_ws <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_ws_daily.xlsx")
+
+# humedad relativa
+eb_rh <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/eb_rh_daily.xlsx")
+
+# revisamos el formato
+
+c(str(eb_temperature), str(eb_pm10), str(eb_pm25), str(eb_o3), str(eb_ws), str(eb_rh))
 
 
+#######################################
+######### cambio de formatos ########## 
+#######################################
+
+# DEIS
+eb_mortality_all_causes$date <- lubridate::ymd(eb_mortality_all_causes$date)
+eb_mortality_cardio$date <- lubridate::ymd(eb_mortality_cardio$date)
+eb_mortality_resp$date <- lubridate::ymd(eb_mortality_resp$date)
+
+# SINCA
+eb_temperature$date <- lubridate::ymd(eb_temperature$date) 
+eb_pm10$date <- lubridate::ymd(eb_pm10$date)
+eb_pm25$date <- lubridate::ymd(eb_pm25$date)
+eb_o3$date <- lubridate::ymd(eb_o3$date)
+eb_ws$date <- lubridate::ymd(eb_ws$date)
+eb_rh$date <- lubridate::ymd(eb_rh$date)
 
 
+#######################################
+############## Join ################### #### variables ambientales
+#######################################
+library(tidyverse)
+
+# primero creamos una lista donde incluimos a todos nuestros dataset
+eb_list <- list(eb_temperature, eb_pm10, eb_pm25, eb_o3, eb_ws, eb_rh)
+
+# combinamos todos los dataset, utilizando las variables data, year, month y day, ya que son las que se repiten en nuestro dataframe
+eb_sinca <- eb_list %>% reduce(full_join, by= c('date', 'year', 'month', 'day'))
+
+#reordenamos las variables usando select
+eb_sinca <- eb_sinca %>%
+  select(date, year, month, day, temp_mean:rh_min)
+
+#######################################
+############## Join ################### #### variables ambientales + mortalidad
+#######################################
+
+# mortalidad por todas las causas 
+eb_all_causes_sinca_2017_2019 <- full_join(eb_mortality_all_causes, eb_sinca , by = 'date')
+
+# mortalidad por causas cardiovasculares
+eb_cardio_sinca_2017_2019 <- full_join(eb_mortality_cardio, eb_sinca , by = 'date')
+
+# mortalidad por causas respiratorias
+eb_resp_2017_2019 <- full_join(eb_mortality_resp, eb_sinca , by = 'date')
+
+# revisamos la estructura de la nueva base de datos
+c(str(eb_all_causes_sinca_2017_2019), str(eb_cardio_sinca_2017_2019), str(eb_resp_2017_2019))
 
 
+#############################################
+############## exportamos ################### #### cerro navia ####
+############################################
 
+rio::export(eb_all_causes_sinca_2017_2019, "eb_all_causes_sinca_2017_2019.xlsx") # exportamos mortalidad por todas las causas
+
+rio::export(eb_cardio_sinca_2017_2019, "eb_cardio_sinca_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
+
+rio::export(eb_resp_2017_2019 , "eb_resp_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
+
+
+###########################################
+########### Santiago Centro ###############
+##########################################
+
+# cargamos los datos 2017-2019 para datos ambientales (SINCA) y datos de mortalidad (DEIS)
+
+# mortalidad para todas las causas 2017-2019 
+sc_mortality_all_causes <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_sc/mortality_sc_all_causes_2017_2019.xlsx")
+
+#mortalidad causas cardiovascular 2017-2019
+sc_mortality_cardio <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_sc/mortality_sc_cardio_2017_2019.xlsx")
+
+#mortalidad causas respiratorias 2017-2019
+sc_mortality_resp <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/DEIS_2017_2019/mortality/mortality_sc/mortality_sc_resp_2017_2019.xlsx")
+
+# datos ambientales 
+
+# temperatura 
+sc_temperature <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_temp_daily.xlsx")
+
+# pm10
+sc_pm10 <- read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_pm10_daily.xlsx")
+
+# pm25 
+sc_pm25 <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_pm25_daily.xlsx")
+
+# ozono
+sc_o3 <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_o3_daily.xlsx")
+
+# velocidad del viento 
+sc_ws <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_ws_daily.xlsx")
+
+# humedad relativa
+sc_rh <-read_xlsx("/Users/aldominguez/Desktop/Github_Proyectos/Heatwaves/Data/SINCA_2017_2019/sc_rh_daily.xlsx")
+
+# revisamos el formato
+
+c(str(sc_temperature), str(sc_pm10), str(sc_pm25), str(sc_o3), str(sc_ws), str(sc_rh))
+
+
+#######################################
+######### cambio de formatos ########## 
+#######################################
+
+# DEIS
+sc_mortality_all_causes$date <- lubridate::ymd(sc_mortality_all_causes$date)
+sc_mortality_cardio$date <- lubridate::ymd(sc_mortality_cardio$date)
+sc_mortality_resp$date <- lubridate::ymd(sc_mortality_resp$date)
+
+# SINCA
+sc_temperature$date <- lubridate::ymd(sc_temperature$date) 
+sc_pm10$date <- lubridate::ymd(sc_pm10$date)
+sc_pm25$date <- lubridate::ymd(sc_pm25$date)
+sc_o3$date <- lubridate::ymd(sc_o3$date)
+sc_ws$date <- lubridate::ymd(sc_ws$date)
+sc_rh$date <- lubridate::ymd(sc_rh$date)
+
+#######################################
+############## Join ################### #### variables ambientales
+#######################################
+library(tidyverse)
+
+# primero creamos una lista donde incluimos a todos nuestros dataset
+sc_list <- list(sc_temperature, sc_pm10, sc_pm25, sc_o3, sc_ws, sc_rh)
+
+# combinamos todos los dataset, utilizando las variables data, year, month y day, ya que son las que se repiten en nuestro dataframe
+sc_sinca <- sc_list %>% reduce(full_join, by= c('date', 'year', 'month', 'day'))
+
+#reordenamos las variables usando select
+sc_sinca <- sc_sinca %>%
+  select(date, year, month, day, temp_mean:rh_min)
+
+#######################################
+############## Join ################### #### variables ambientales + mortalidad
+#######################################
+
+# mortalidad por todas las causas 
+sc_all_causes_sinca_2017_2019 <- full_join(sc_mortality_all_causes, sc_sinca , by = 'date')
+
+# mortalidad por causas cardiovasculares
+sc_cardio_sinca_2017_2019 <- full_join(sc_mortality_cardio, sc_sinca , by = 'date')
+
+# mortalidad por causas respiratorias
+sc_resp_2017_2019 <- full_join(sc_mortality_resp, sc_sinca , by = 'date')
+
+# revisamos la estructura de la nueva base de datos
+c(str(sc_all_causes_sinca_2017_2019), str(sc_cardio_sinca_2017_2019), str(sc_resp_2017_2019))
+
+#############################################
+############## exportamos ################### #### cerro navia ####
+############################################
+
+rio::export(sc_all_causes_sinca_2017_2019, "sc_all_causes_sinca_2017_2019.xlsx") # exportamos mortalidad por todas las causas
+
+rio::export(sc_cardio_sinca_2017_2019, "sc_cardio_sinca_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
+
+rio::export(sc_resp_2017_2019 , "sc_resp_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
 
 
 
