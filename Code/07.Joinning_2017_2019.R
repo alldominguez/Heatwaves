@@ -379,7 +379,7 @@ cn_o3_scatter <- ggplot2::ggplot(cn_o3, mapping = aes(x = date, y = o3_mean)) +
 cn_serie <- cn_temperature_scatter / cn_pm10_scatter / cn_pm25_scatter / cn_o3_scatter / cn_ws_scatter / cn_rh_scatter 
 
 
-use_git_config(user.name = "alldominguez", user.email = "aidominguezmontoya@gmail.com")
+
 
 
 
