@@ -314,7 +314,7 @@ rio::export(sc_resp_2017_2019 , "sc_resp_2017_2019.xlsx") # exportamos mortalida
 
 
 
-
+ 
 
 
 
