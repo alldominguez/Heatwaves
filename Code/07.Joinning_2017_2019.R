@@ -361,7 +361,7 @@ cn_ws_scatter <- ggplot2::ggplot(cn_ws, mapping = aes(x = date, y = ws_mean)) +
   scale_x_date(date_breaks = '1 years', # definimos cada cuantos años tenemos un break 
                date_labels = "%Y") + # definimos que aparece como etiqueta en este caso %Y indica año
   geom_smooth(colour = "blue")  # si queremos añadir la tendencia
-
+ 
 # generamos un grafico para revisar la serie de tiempo de las humedad relativa
 cn_rh_scatter <- ggplot2::ggplot(cn_rh, mapping = aes(x = date, y = rh_mean)) + 
   geom_point() + xlab("Date") + ylab("Relative Humidity \n (%) ") + theme_classic() + 
