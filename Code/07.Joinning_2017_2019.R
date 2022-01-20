@@ -199,17 +199,17 @@ eb_resp_2017_2019 <- full_join(eb_mortality_resp, eb_sinca , by = 'date')
 
 # revisamos la estructura de la nueva base de datos
 c(str(eb_all_causes_sinca_2017_2019), str(eb_cardio_sinca_2017_2019), str(eb_resp_2017_2019))
-
+ 
 
 #############################################
-############## exportamos ################### #### cerro navia ####
+############## exportamos ################### #### el bosque ####
 ############################################
 
 rio::export(eb_all_causes_sinca_2017_2019, "eb_all_causes_sinca_2017_2019.xlsx") # exportamos mortalidad por todas las causas
 
 rio::export(eb_cardio_sinca_2017_2019, "eb_cardio_sinca_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
 
-rio::export(eb_resp_2017_2019 , "eb_resp_2017_2019.xlsx") # exportamos mortalidad por causas cardiovasculares
+rio::export(eb_resp_2017_2019 , "eb_resp_2017_2019.xlsx") # exportamos mortalidad por causas respiratorias
 
 
 ###########################################
@@ -301,7 +301,7 @@ sc_resp_2017_2019 <- full_join(sc_mortality_resp, sc_sinca , by = 'date')
 c(str(sc_all_causes_sinca_2017_2019), str(sc_cardio_sinca_2017_2019), str(sc_resp_2017_2019))
 
 #############################################
-############## exportamos ################### #### cerro navia ####
+############## exportamos ################### #### santiago centro ####
 ############################################
 
 rio::export(sc_all_causes_sinca_2017_2019, "sc_all_causes_sinca_2017_2019.xlsx") # exportamos mortalidad por todas las causas
